@@ -1,4 +1,8 @@
 <?php
+
+
+echo "hello";
+exit;
 require_once 'db.php';
 $conn = get_pdo();
 

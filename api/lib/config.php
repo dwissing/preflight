@@ -1,5 +1,10 @@
 <?php
 
+// Enable CORS for all domains (for development)
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 /* ----------------------------------- So I can see PHP errors ---------------------------------- */
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
