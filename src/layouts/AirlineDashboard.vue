@@ -2,6 +2,7 @@
   <div>
     <h1>Airline Dashboard</h1>
     <p>Zone: {{ store.selected_zone }}</p>
+    z
   </div>
 </template>
 
