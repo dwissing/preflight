@@ -1,14 +1,5 @@
 <?php
 include "config.php";
-// include "./common/activity_log.php";
-// function must_have_google_auth()
-// {
-//     if (!isset($_SESSION['authorized']) || $_SESSION['authorized'] == false) {
-//         header('HTTP/1.0 401 Unauthorized');
-//         echo 'Unauthorizzed';
-//         exit;
-//     }
-// }
 
 function get_pdo()
 

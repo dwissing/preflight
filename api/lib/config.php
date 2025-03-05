@@ -1,10 +1,5 @@
 <?php
 
-// Enable CORS for all domains (for development)
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
 /* ----------------------------------- So I can see PHP errors ---------------------------------- */
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -27,7 +22,8 @@ function get_db_config()
     return $config;
   } else {
     opcache_reset();
-    $config = (object) array('username' => 'root', 'password' => 'me1neDSQ9d1/', 'dsn' => 'mysql:host=localhost;dbname=preflight-dev;charset=utf8mb4', 'options' => $options);
+    $config = (object) array('username' => 'root', 'password' => 'me1neDSQ9d1/', 'dsn' => 'mysql:host=localhost;dbname=preflight;charset=utf8mb4', 'options' => $options);
+    // $config = (object) array('username' => 'root', 'password' => 'me1neDSQ9d1/', 'dsn' => 'mysql:host=localhost;dbname=preflight-dev;charset=utf8mb4', 'options' => $options);
     return $config;
   }
 }
