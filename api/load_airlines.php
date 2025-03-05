@@ -15,8 +15,7 @@ exit;
 
 function load_airlines($data)
 {
-    var_dump($data);
-    exit;
+
     $conn = get_pdo();
 
     $zone = $data->zone;

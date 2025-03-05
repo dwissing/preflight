@@ -1,37 +1,28 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export const useAppState = defineStore('appState', {
-  state: () => ({
-    is_dev: process.env.NODE_ENV === 'development',
-    teleport_ready: false,
-    sidebar_expansion_group: {
+export const useAppState = defineStore(
+  'appState',
+  () => {
+    const is_dev = ref(process.env.NODE_ENV === 'development')
+    const teleport_ready = ref(false)
+    const sidebar_expansion_group = ref({
       airlines: false,
-    },
-    current_date: '',
-    selected_zone: '',
+    })
+    const current_date = ref('')
+    const selected_zone = ref('')
+    const loading = ref(false)
 
-    loading: false,
-  }),
-
-  /* ------------------------------------------- ACTIONS ------------------------------------------ */
-  actions: {
-    clear_profile() {
-      // this.profile = {
-      //   id: '',
-      //   name: '',
-      //   email: '',
-      //   picture: '',
-      //   role: '',
-      //   is_hotline: '',
-      //   is_sales: '',
-      //   default_region: '',
-      //   time_zone: '',
-      //   office: '',
-      //   phone: '',
-      //   contact_email: '',
-      //   job_description: '',
-      // };
-    },
+    return {
+      is_dev,
+      teleport_ready,
+      sidebar_expansion_group,
+      current_date,
+      selected_zone,
+      loading,
+    }
   },
-  getters: {},
-});
+  {
+    persist: true,
+  }
+)
