@@ -1,5 +1,5 @@
 export interface Airline {
-  airline_id: number
+  id: number
   name: string
   abbreviation: string
   monday: string

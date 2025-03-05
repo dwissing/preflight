@@ -1,28 +1,40 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
-export const useAppState = defineStore(
-  'appState',
-  () => {
-    const is_dev = ref(process.env.NODE_ENV === 'development')
-    const teleport_ready = ref(false)
-    const sidebar_expansion_group = ref({
+export const useAppState = defineStore('appState', {
+  // 1) State must declare all properties you use later
+  state: () => ({
+    is_dev: process.env.NODE_ENV === 'development',
+    teleport_ready: false,
+    sidebar_expansion_group: {
       airlines: false,
-    })
-    const current_date = ref('')
-    const selected_zone = ref('')
-    const loading = ref(false)
+      preflight_checks: false,
+      clerk_schedule: false,
+      gate_schedule: false,
+    },
+    current_date: '',
+    selected_zone: '',
+    loading: false,
+    profile: {} as Record<string, unknown>, // Example property
+  }),
 
-    return {
-      is_dev,
-      teleport_ready,
-      sidebar_expansion_group,
-      current_date,
-      selected_zone,
-      loading,
-    }
+  // 2) Actions (functions) that mutate state
+  actions: {
+    clear_profile() {
+      // Make sure `profile` exists in state
+      this.profile = {}
+    },
   },
-  {
-    persist: true,
-  }
-)
+
+  // 3) (Optional) Getters if you need computed-like properties
+  getters: {
+    // example_getter(state) {
+    //   return state.selected_zone.toUpperCase();
+    // },
+  },
+
+  // 4) Configure which parts of state to persist
+  persist: {
+    storage: localStorage,
+    pick: ['selected_zone'],
+  },
+})

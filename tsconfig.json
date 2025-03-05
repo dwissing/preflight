@@ -10,5 +10,9 @@
     "./src-capacitor",
     "./src-cordova",
     "./quasar.config.*.temporary.compiled*"
+  ],
+  "include": [
+    "./src/types/**/*.d.ts",
+    "src/types/pinia-plugin-persistedstate.d.ts"
   ]
 }

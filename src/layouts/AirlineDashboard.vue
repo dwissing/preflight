@@ -1,42 +1,36 @@
 <template>
-  <q-card>
-    <div class="row">
-      <q-card-section class="col-6">
-        <h6>Today's terminals</h6>
+  <div class="row">
+    <q-card class="col-6">
+      <q-card-section>
+        <h6 class="q-my-none">Today's terminals</h6>
         {{ today }}
         <div class="row">
-          <div
-            v-for="airline in todays_airlines"
-            :key="airline.airline_id"
-            class="airline"
-          >
+          <div v-for="airline in todays_airlines" :key="airline.id">
             <SingleAirline :airline="airline" />
           </div>
         </div>
       </q-card-section>
-      <q-card-section class="col-6">
-        <h6>Tomorrow's terminals</h6>
+    </q-card>
+    <q-card class="col-6">
+      <q-card-section>
+        <h6 class="q-my-none">Tomorrow's terminals</h6>
         <div class="row">
-          <div
-            v-for="airline in tomorrows_airlines"
-            :key="airline.airline_id"
-            class="airline"
-          >
+          <div v-for="airline in tomorrows_airlines" :key="airline.id">
             <SingleAirline :airline="airline" />
           </div>
         </div>
       </q-card-section>
-    </div>
-  </q-card>
+    </q-card>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref, watch, computed } from 'vue'
 import dayjs from 'dayjs'
 import axios from 'axios'
-import { useAppState } from 'src/stores/appState'
-import type { Airline } from 'src/types/airline.interface'
-import SingleAirline from 'src/components/SingleAirline.vue'
+import { useAppState } from '../stores/appState'
+import type { Airline } from '../types/airline.interface'
+import SingleAirline from '../components/SingleAirline.vue'
 const store = useAppState()
 const airlines = ref<Airline[]>([])
 
@@ -69,7 +63,7 @@ const tomorrows_airlines = computed(() =>
 async function getAirlines() {
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}load_airlines.php`,
+      `${process.env.VITE_API_URL}load_airlines.php`,
       {
         zone: store.selected_zone,
       },
@@ -87,9 +81,4 @@ async function getAirlines() {
 }
 </script>
 
-<style scoped>
-.airline {
-  width: 200px;
-  max-width: 300px;
-}
-</style>
+<style scoped></style>

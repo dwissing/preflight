@@ -3,7 +3,7 @@
     <q-expansion-item
       v-model="store.sidebar_expansion_group.airlines"
       group="somegroup"
-      label="Regions"
+      label="Zone Dashboard"
       popout
       :class="store.sidebar_expansion_group.airlines ? 'expanded' : 'collapsed'"
       :header-class="
@@ -67,17 +67,153 @@
       </q-item>
     </q-expansion-item>
     <q-separator></q-separator>
+    <q-expansion-item
+      v-model="store.sidebar_expansion_group.preflight_checks"
+      group="somegroup"
+      label="Preflight Checks"
+      popout
+      :class="
+        store.sidebar_expansion_group.preflight_checks
+          ? 'expanded'
+          : 'collapsed'
+      "
+      :header-class="
+        store.sidebar_expansion_group.preflight_checks
+          ? 'text-primary expanded-header'
+          : 'text-primary collapsed-header'
+      "
+      icon="mdi-account-multiple"
+    >
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'Northeast' ? 'myactive' : ''"
+        @click="store.selected_zone = 'Northeast'"
+        to="/airline-dashboard"
+      >
+        Northeast
+      </q-item>
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'Gulf' ? 'myactive' : ''"
+        @click="store.selected_zone = 'Gulf'"
+        to="/airline-dashboard"
+      >
+        Gulf
+      </q-item>
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'Midwest' ? 'myactive' : ''"
+        @click="store.selected_zone = 'Midwest'"
+        to="/airline-dashboard"
+      >
+        Midwest
+      </q-item>
 
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'Central' ? 'myactive' : ''"
+        @click="store.selected_zone = 'Central'"
+        to="/airline-dashboard"
+      >
+        Central
+      </q-item>
+
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'West' ? 'myactive' : ''"
+        @click="store.selected_zone = 'West'"
+        to="/airline-dashboard"
+      >
+        West
+      </q-item>
+    </q-expansion-item>
     <q-separator></q-separator>
+    <q-expansion-item
+      v-model="store.sidebar_expansion_group.clerk_schedule"
+      group="somegroup"
+      label="Clerk Schedule"
+      popout
+      :class="
+        store.sidebar_expansion_group.clerk_schedule ? 'expanded' : 'collapsed'
+      "
+      :header-class="
+        store.sidebar_expansion_group.clerk_schedule
+          ? 'text-primary expanded-header'
+          : 'text-primary collapsed-header'
+      "
+      icon="mdi-account-multiple"
+    >
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'Northeast' ? 'myactive' : ''"
+        @click="store.selected_zone = 'Northeast'"
+        to="/airline-dashboard"
+      >
+        Northeast
+      </q-item>
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'Gulf' ? 'myactive' : ''"
+        @click="store.selected_zone = 'Gulf'"
+        to="/airline-dashboard"
+      >
+        Gulf
+      </q-item>
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'Midwest' ? 'myactive' : ''"
+        @click="store.selected_zone = 'Midwest'"
+        to="/airline-dashboard"
+      >
+        Midwest
+      </q-item>
 
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'Central' ? 'myactive' : ''"
+        @click="store.selected_zone = 'Central'"
+        to="/airline-dashboard"
+      >
+        Central
+      </q-item>
+
+      <q-item
+        dense
+        clickable
+        exact
+        :active-class="store.selected_zone === 'West' ? 'myactive' : ''"
+        @click="store.selected_zone = 'West'"
+        to="/airline-dashboard"
+      >
+        West
+      </q-item>
+    </q-expansion-item>
     <q-separator></q-separator>
   </q-list>
 </template>
 
 <script setup lang="ts">
-import { useAppState } from 'src/stores/appState';
+import { useAppState } from '../stores/appState'
 
-const store = useAppState();
+const store = useAppState()
 </script>
 
 <style lang="scss" scoped>

@@ -1,19 +1,44 @@
 <template>
   <q-card class="my-card">
-    <q-card-section>
-      <h6>{{ props.airline.abbreviation }}</h6>
-      <p>{{ props.airline.name }}</p>
+    <q-card-section class="q-pa-xs">
+      <div class="row align-center">
+        <div class="q-my-none text-bold q-pt-xs" style="width: 40px">
+          {{ props.airline.abbreviation }}
+        </div>
+        <div
+          class="q-mb-none"
+          style="
+            width: 150px;
+            height: 30px;
+            line-height: 1.1em;
+            font-size: 0.9em;
+          "
+        >
+          {{ props.airline.name }}
+        </div>
+      </div>
+      <div class="gate" v-for="gate in gates" :key="gate.id">
+        <SingleGate
+          :passed_gate="gate"
+          :airline="props.airline"
+          :gate_number="Number(gate.gate_number)"
+        />
+      </div>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, PropType } from 'vue'
+import axios from 'axios'
+
+import SingleGate from './SingleGate.vue'
+import { Gate } from '../types/gate.interface'
 import { Airline } from '../types/airline.interface'
-import { Terminal } from '../types/terminal.interface'
+// import { Terminal } from '../types/terminal.interface'
 
-const terminals = ref<Terminal[]>([])
-
+// const terminals = ref<Terminal[]>([])
+const gates = ref<Gate[]>([])
 const props = defineProps({
   airline: {
     type: Object as PropType<Airline>,
@@ -22,20 +47,34 @@ const props = defineProps({
 })
 
 onMounted(() => {
-  getTerminals()
+  get_gates()
 })
 
-async function getTerminals() {
+// async function getTerminals() {
+//   try {
+//     const response = await fetch(
+//       `${import.meta.env.VITE_API_URL}load_terminals.php`,
+//       {
+//         method: 'POST',
+//         body: JSON.stringify({ airline_id: props.airline.id }),
+//       }
+//     )
+//     const data = await response.json()
+//     terminals.value = data
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
+async function get_gates() {
   try {
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}load_terminals.php`,
+    const response = await axios.post(
+      `${process.env.VITE_API_URL}load_gates.php`,
       {
-        method: 'POST',
-        body: JSON.stringify({ airline_id: props.airline.airline_id }),
+        airline_id: props.airline.id,
       }
     )
-    const data = await response.json()
-    terminals.value = data
+    console.log(response.data)
+    gates.value = response.data
   } catch (error) {
     console.error(error)
   }
@@ -44,7 +83,8 @@ async function getTerminals() {
 
 <style scoped>
 .my-card {
-  width: 300px;
-  max-width: 300px;
+  width: 200px;
+  max-width: 200px;
+  padding: 0px;
 }
 </style>
