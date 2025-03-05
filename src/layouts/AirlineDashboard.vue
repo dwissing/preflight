@@ -1,9 +1,12 @@
 <template>
   <div>
-    <h1>Airline Dashboard</h1>
+    <h6>Airline Dashboard</h6>
     <p>Zone: {{ store.selected_zone }}</p>
-
-    {{ airlines }}
+    <div class="row">
+      <div v-for="airline in airlines" :key="airline.airline_id">
+        <SingleAirline :airline="airline" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -11,7 +14,7 @@
 import { onMounted, ref, watch } from 'vue'
 import axios from 'axios'
 import { useAppState } from 'src/stores/appState'
-
+import SingleAirline from 'src/components/SingleAirline.vue'
 const store = useAppState()
 const airlines = ref<any[]>([])
 
