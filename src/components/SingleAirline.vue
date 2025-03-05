@@ -4,19 +4,14 @@
       <h6>{{ props.airline.abbreviation }}</h6>
       <p>{{ props.airline.name }}</p>
     </q-card-section>
-    <q-card-section>
-      <q-btn>Edit</q-btn>
-    </q-card-section>
   </q-card>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, PropType } from 'vue'
-import { useAppState } from 'src/stores/appState'
 import { Airline } from '../types/airline.interface'
 import { Terminal } from '../types/terminal.interface'
 
-const store = useAppState()
 const terminals = ref<Terminal[]>([])
 
 const props = defineProps({

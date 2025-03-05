@@ -1,22 +1,44 @@
 <template>
-  <div>
-    <h6>Airline Dashboard</h6>
-    <p>Zone: {{ store.selected_zone }}</p>
+  <q-card>
     <div class="row">
-      <div v-for="airline in airlines" :key="airline.airline_id">
-        <SingleAirline :airline="airline" />
-      </div>
+      <q-card-section class="col-6">
+        <h6>Today's terminals</h6>
+        {{ today }}
+        <div class="row">
+          <div
+            v-for="airline in todays_airlines"
+            :key="airline.airline_id"
+            class="airline"
+          >
+            <SingleAirline :airline="airline" />
+          </div>
+        </div>
+      </q-card-section>
+      <q-card-section class="col-6">
+        <h6>Tomorrow's terminals</h6>
+        <div class="row">
+          <div
+            v-for="airline in tomorrows_airlines"
+            :key="airline.airline_id"
+            class="airline"
+          >
+            <SingleAirline :airline="airline" />
+          </div>
+        </div>
+      </q-card-section>
     </div>
-  </div>
+  </q-card>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, computed } from 'vue'
+import dayjs from 'dayjs'
 import axios from 'axios'
 import { useAppState } from 'src/stores/appState'
+import type { Airline } from 'src/types/airline.interface'
 import SingleAirline from 'src/components/SingleAirline.vue'
 const store = useAppState()
-const airlines = ref<any[]>([])
+const airlines = ref<Airline[]>([])
 
 onMounted(() => {
   getAirlines()
@@ -27,6 +49,22 @@ watch(
     getAirlines()
   },
   { immediate: true }
+)
+const today = computed(() => dayjs().format('dddd').toLowerCase())
+const tomorrow = computed(() =>
+  dayjs().add(1, 'day').format('dddd').toLowerCase()
+)
+const todays_airlines = computed(() =>
+  airlines.value.filter((airline) => {
+    const dayKey = today.value as keyof typeof airline
+    return airline[dayKey] !== null
+  })
+)
+const tomorrows_airlines = computed(() =>
+  airlines.value.filter((airline) => {
+    const dayKey = tomorrow.value as keyof typeof airline
+    return airline[dayKey] !== null
+  })
 )
 async function getAirlines() {
   try {
@@ -48,3 +86,10 @@ async function getAirlines() {
   }
 }
 </script>
+
+<style scoped>
+.airline {
+  width: 200px;
+  max-width: 300px;
+}
+</style>
