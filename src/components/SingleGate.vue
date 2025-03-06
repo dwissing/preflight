@@ -123,7 +123,7 @@ function get_row_class() {
 async function get_gate_check() {
   try {
     const response = await axios.post(
-      `${process.env.VITE_API_URL}get_gate_check.php`,
+      `${import.meta.env.VITE_API_URL}get_gate_check.php`,
       {
         airline_id: props.airline.id,
         gate_number: props.gate_number,
@@ -142,7 +142,7 @@ async function get_gate_check() {
 async function create_gate_check() {
   try {
     const response = await axios.post(
-      `${process.env.VITE_API_URL}create_gate_check.php`,
+      `${import.meta.env.VITE_API_URL}create_gate_check.php`,
       {
         airline_id: props.airline.id,
         gate_number: props.gate_number,
@@ -158,7 +158,7 @@ async function create_gate_check() {
 async function get_gate_clerk() {
   try {
     const response = await axios.post(
-      `${process.env.VITE_API_URL}get_gate_clerk.php`,
+      `${import.meta.env.VITE_API_URL}get_gate_clerk.php`,
       {
         gate_id: props.passed_gate.id,
       }

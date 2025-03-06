@@ -68,7 +68,7 @@ onMounted(() => {
 async function get_gates() {
   try {
     const response = await axios.post(
-      `${process.env.VITE_API_URL}load_gates.php`,
+      `${import.meta.env.VITE_API_URL}load_gates.php`,
       {
         airline_id: props.airline.id,
       }

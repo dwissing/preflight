@@ -63,7 +63,7 @@ const tomorrows_airlines = computed(() =>
 async function getAirlines() {
   try {
     const response = await axios.post(
-      `${process.env.VITE_API_URL}load_airlines.php`,
+      `${import.meta.env.VITE_API_URL}load_airlines.php`,
       {
         zone: store.selected_zone,
       },
