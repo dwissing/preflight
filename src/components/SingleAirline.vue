@@ -83,8 +83,8 @@ async function get_gates() {
 
 <style scoped>
 .my-card {
-  width: 200px;
-  max-width: 200px;
+  width: 220px;
+  max-width: 220px;
   padding: 0px;
 }
 </style>

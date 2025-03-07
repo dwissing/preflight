@@ -88,6 +88,7 @@
         v-model="store.selected_airline"
         :options="store.airlines"
         option-value="abbreviation"
+        label="Terminal"
         option-label="abbreviation"
       ></q-select>
     </q-expansion-item>

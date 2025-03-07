@@ -21,6 +21,10 @@
           <q-icon size="20px" name="mdi-vhs" :class="get_dvr_class()" />
         </div>
       </div>
+      <div class="clerk">
+        <div class="">{{ gate_clerk.name }}</div>
+        <div class="">{{ gate_clerk.phone }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -173,8 +177,8 @@ async function get_gate_clerk() {
 
 <style scoped>
 .gate-card {
-  width: 192px;
-  max-width: 192px;
+  width: 200px;
+  max-width: 200px;
   border: 1px solid #ccc;
   border-radius: 5px;
   line-height: 0.9em;
@@ -209,5 +213,13 @@ async function get_gate_clerk() {
   text-align: center;
   padding-left: 2px;
   padding-top: 14px;
+}
+.clerk {
+  font-size: 0.8em;
+  line-height: 0.9em;
+  width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
