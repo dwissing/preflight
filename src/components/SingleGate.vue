@@ -1,6 +1,6 @@
 <template>
   <div :class="get_row_class()">
-    <div class="row align-center">
+    <div class="row align-center" @dblclick="open_preflight_check">
       <div class="number">{{ gate.gate_number }}</div>
       <div class="">
         <div class="">
@@ -33,10 +33,14 @@
 import { ref, PropType, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+import { useAppState } from '../stores/appState'
 import { Gate } from '../types/gate.interface'
 import { GateCheck } from '../types/gate_check.interface'
 import { Airline } from '../types/airline.interface'
 import { GateClerk } from '../types/gate_clerk.interface'
+const router = useRouter()
+const store = useAppState()
 // import { Terminal } from '../types/terminal.interface'
 const props = defineProps({
   passed_gate: {
@@ -60,6 +64,11 @@ onMounted(() => {
   get_gate_check()
   get_gate_clerk()
 })
+
+function open_preflight_check() {
+  store.selected_gate = gate.value
+  router.push('/preflight-check')
+}
 
 function formatTime(time: string) {
   // Handle cases where time might be null or undefined
@@ -93,9 +102,9 @@ function get_video_class() {
 }
 
 function get_vehicle_class() {
-  if (gate_check.value.first_flight_verified == true) {
+  if (gate_check.value.first_flight_verified == 'good') {
     return 'good'
-  } else if (gate_check.value.first_flight_verified == false) {
+  } else if (gate_check.value.first_flight_verified == 'bad') {
     return 'unknown'
   } else {
     return 'unknown'
@@ -103,9 +112,9 @@ function get_vehicle_class() {
 }
 
 function get_dvr_class() {
-  if (gate_check.value.dvr_status == 'good') {
+  if (gate_check.value.audio_status == 'good') {
     return 'good'
-  } else if (gate_check.value.dvr_status == 'bad') {
+  } else if (gate_check.value.audio_status == 'bad') {
     return 'bad'
   } else {
     return 'unknown'
@@ -116,11 +125,17 @@ function get_row_class() {
   if (
     gate_check.value.audio_status == 'good' &&
     gate_check.value.video_status == 'good' &&
-    gate_check.value.first_flight_verified == true
+    gate_check.value.first_flight_verified == 'good'
   ) {
     return 'gate-good gate-card'
-  } else {
+  } else if (
+    gate_check.value.audio_status == 'bad' ||
+    gate_check.value.video_status == 'bad' ||
+    gate_check.value.first_flight_verified == 'bad'
+  ) {
     return 'gate-bad gate-card'
+  } else {
+    return 'gate-unknown gate-card'
   }
 }
 
@@ -197,9 +212,13 @@ async function get_gate_clerk() {
   background-color: #bcffbc;
   border-color: #5eae58;
 }
-.gate-bad {
+.gate-unknown {
   background-color: #fedda8;
   border-color: #ff9900;
+}
+.gate-bad {
+  background-color: #ffb3b3;
+  border-color: #ff0000;
 }
 .icons {
   background-color: #fff;

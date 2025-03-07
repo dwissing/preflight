@@ -1,6 +1,6 @@
 export interface GateCheck {
   id: string
-  airport_id: string
+  airline_id: string
   gate_id: string
   gate_number: string
   audio_status: string
@@ -12,7 +12,7 @@ export interface GateCheck {
   updated_at: Date
   audio_test_url: string
   video_test_url: string
-  first_flight_verified: boolean
+  first_flight_verified: string
   flights_started_time: string
   flights_ended_time: string
   flight_count: number
