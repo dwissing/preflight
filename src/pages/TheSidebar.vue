@@ -84,58 +84,12 @@
       "
       icon="mdi-account-multiple"
     >
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Northeast' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Northeast'"
-        to="/airline-dashboard"
-      >
-        Northeast
-      </q-item>
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Gulf' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Gulf'"
-        to="/airline-dashboard"
-      >
-        Gulf
-      </q-item>
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Midwest' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Midwest'"
-        to="/airline-dashboard"
-      >
-        Midwest
-      </q-item>
-
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Central' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Central'"
-        to="/airline-dashboard"
-      >
-        Central
-      </q-item>
-
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'West' ? 'myactive' : ''"
-        @click="store.selected_zone = 'West'"
-        to="/airline-dashboard"
-      >
-        West
-      </q-item>
+      <q-select
+        v-model="store.selected_airline"
+        :options="store.airlines"
+        option-value="abbreviation"
+        option-label="abbreviation"
+      ></q-select>
     </q-expansion-item>
     <q-separator></q-separator>
     <q-expansion-item
@@ -211,9 +165,16 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { useAppState } from '../stores/appState'
 
 const store = useAppState()
+
+onMounted(() => {
+  if (store.airlines.length === 0) {
+    store.load_airlines()
+  }
+})
 </script>
 
 <style lang="scss" scoped>

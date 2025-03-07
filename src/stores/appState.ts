@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-
+import axios from 'axios'
+import { Airline } from '../types/airline.interface'
 export const useAppState = defineStore('appState', {
   // 1) State must declare all properties you use later
   state: () => ({
@@ -11,6 +12,8 @@ export const useAppState = defineStore('appState', {
       clerk_schedule: false,
       gate_schedule: false,
     },
+    airlines: [],
+    selected_airline: {} as Airline,
     current_date: '',
     selected_zone: '',
     loading: false,
@@ -22,6 +25,20 @@ export const useAppState = defineStore('appState', {
     clear_profile() {
       // Make sure `profile` exists in state
       this.profile = {}
+    },
+    async load_airlines() {
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}load_airlines.php`,
+          {
+            zone: this.selected_zone,
+          }
+        )
+        console.log(response.data)
+        this.airlines = response.data
+      } catch (error) {
+        console.error('Error loading airlines:', error)
+      }
     },
   },
 
@@ -35,6 +52,6 @@ export const useAppState = defineStore('appState', {
   // 4) Configure which parts of state to persist
   persist: {
     storage: localStorage,
-    pick: ['selected_zone'],
+    pick: ['selected_zone', 'airlines', 'selected_airline'],
   },
 })
