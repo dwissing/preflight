@@ -2,6 +2,7 @@ export interface GateCheck {
   id: string
   airport_id: string
   gate_id: string
+  gate_number: string
   audio_status: string
   dvr_status: string
   audio_tested: boolean

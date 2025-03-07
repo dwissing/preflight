@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { Airline } from '../types/airline.interface'
+import type { GateCheck } from '../types/gate_check.interface'
 export const useAppState = defineStore('appState', {
   // 1) State must declare all properties you use later
   state: () => ({
@@ -14,6 +15,9 @@ export const useAppState = defineStore('appState', {
     },
     airlines: [],
     selected_airline: {} as Airline,
+    gates: [] as GateCheck[],
+    selected_gate: {} as GateCheck,
+
     current_date: '',
     selected_zone: '',
     loading: false,
@@ -38,6 +42,20 @@ export const useAppState = defineStore('appState', {
         this.airlines = response.data
       } catch (error) {
         console.error('Error loading airlines:', error)
+      }
+    },
+    async load_gates() {
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}load_gates.php`,
+          {
+            airline_id: this.selected_airline.id,
+          }
+        )
+        console.log(response.data)
+        this.gates = response.data
+      } catch (error) {
+        console.error('Error loading gates:', error)
       }
     },
   },

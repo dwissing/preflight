@@ -72,6 +72,7 @@
       group="somegroup"
       label="Preflight Checks"
       popout
+      :to="'/preflight-check'"
       :class="
         store.sidebar_expansion_group.preflight_checks
           ? 'expanded'
@@ -84,13 +85,18 @@
       "
       icon="mdi-account-multiple"
     >
-      <q-select
-        v-model="store.selected_airline"
-        :options="store.airlines"
-        option-value="abbreviation"
-        label="Terminal"
-        option-label="abbreviation"
-      ></q-select>
+      <div class="q-pa-md">
+        <q-select
+          v-model="store.selected_airline"
+          :options="store.airlines"
+          dense
+          options-dense
+          outlined
+          option-value="abbreviation"
+          label="Terminal"
+          option-label="abbreviation"
+        ></q-select>
+      </div>
     </q-expansion-item>
     <q-separator></q-separator>
     <q-expansion-item
@@ -172,6 +178,7 @@ import { useAppState } from '../stores/appState'
 const store = useAppState()
 
 onMounted(() => {
+  store.load_airlines()
   if (store.airlines.length === 0) {
     store.load_airlines()
   }
