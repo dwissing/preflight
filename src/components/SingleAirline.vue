@@ -8,7 +8,7 @@
         <div
           class="q-mb-none"
           style="
-            width: 150px;
+            width: 120px;
             height: 30px;
             line-height: 1.1em;
             font-size: 0.9em;
@@ -16,6 +16,7 @@
         >
           {{ props.airline.name }}
         </div>
+        <q-btn flat round icon="mdi-refresh" @click="reset" />
       </div>
       <div class="gate" v-for="gate in gates" :key="gate.id">
         <SingleGate
@@ -75,6 +76,17 @@ async function get_gates() {
     )
     console.log(response.data)
     gates.value = response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+async function reset() {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}reset.php`,
+      { airline_id: props.airline.id }
+    )
+    console.log(response)
   } catch (error) {
     console.error(error)
   }

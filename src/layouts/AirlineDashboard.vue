@@ -44,9 +44,11 @@ watch(
   },
   { immediate: true }
 )
-const today = computed(() => dayjs().format('dddd').toLowerCase())
+const today = computed(() =>
+  dayjs(store.current_date).format('dddd').toLowerCase()
+)
 const tomorrow = computed(() =>
-  dayjs().add(1, 'day').format('dddd').toLowerCase()
+  dayjs(store.current_date).add(1, 'day').format('dddd').toLowerCase()
 )
 const todays_airlines = computed(() =>
   airlines.value.filter((airline) => {

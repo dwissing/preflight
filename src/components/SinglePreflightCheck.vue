@@ -55,18 +55,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, PropType } from 'vue'
-import type { Gate } from '../types/gate.interface'
+import { ref, onMounted, computed } from 'vue'
 import type { GateCheck } from '../types/gate_check.interface'
 import axios from 'axios'
 import { useAppState } from '../stores/appState'
 const store = useAppState()
-const props = defineProps({
-  gate: {
-    type: Object as PropType<Gate>,
-    default: () => ({}),
-  },
-})
+// const props = defineProps({
+//   gate: {
+//     type: Object as PropType<Gate>,
+//     default: () => ({}),
+//   },
+// })
 onMounted(() => {
   get_gate_check()
 })

@@ -19,7 +19,14 @@
 
           <!-- THESE ARE FOR TELEPORTING: -->
           <div id="search"></div>
-          <div id="controls"></div>
+          <div id="controls">
+            <q-btn @click="set_date(0)">Monday</q-btn>
+            <q-btn @click="set_date(1)">Tuesday</q-btn>
+            <q-btn @click="set_date(2)">Wednesday</q-btn>
+            <q-btn @click="set_date(3)">Thursday</q-btn>
+            <q-btn @click="set_date(4)">Friday</q-btn>
+          </div>
+          date: {{ store.current_date }}
           <!-- --------------------- -->
           <q-space></q-space>
         </q-toolbar>
@@ -54,15 +61,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
+import dayjs from 'dayjs'
 // import { useRouter } from 'vue-router';
-// import { useAppState } from '../stores/appState.ts';
+import { useAppState } from '../stores/appState.ts'
 
-import TheSidebar from '../pages/TheSidebar.vue';
+import TheSidebar from '../pages/TheSidebar.vue'
 // const router = useRouter();
 
-// const store = useAppState();
-const leftDrawerOpen = ref(true);
+const store = useAppState()
+const leftDrawerOpen = ref(true)
+
+async function set_date(date: number) {
+  // Get the date of the Monday of the current week
+  const monday = dayjs().startOf('week')
+  const day = monday.add(date, 'day').format('YYYY-MM-DD')
+  store.current_date = day
+  console.log(date)
+}
 </script>
 
 <style scoped type="text/css">

@@ -26,6 +26,10 @@
         <div class="">{{ gate_clerk.phone }}</div>
       </div>
     </div>
+    <PreflightCheckModal
+      v-if="show_preflight_check"
+      @hide="show_preflight_check = false"
+    />
   </div>
 </template>
 
@@ -33,13 +37,14 @@
 import { ref, PropType, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import axios from 'axios'
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 import { useAppState } from '../stores/appState'
+import PreflightCheckModal from './PreflightCheckModal.vue'
 import { Gate } from '../types/gate.interface'
 import { GateCheck } from '../types/gate_check.interface'
 import { Airline } from '../types/airline.interface'
 import { GateClerk } from '../types/gate_clerk.interface'
-const router = useRouter()
+// const router = useRouter()
 const store = useAppState()
 // import { Terminal } from '../types/terminal.interface'
 const props = defineProps({
@@ -59,7 +64,7 @@ const props = defineProps({
 const gate_check = ref({} as GateCheck)
 const gate_clerk = ref({} as GateClerk)
 const gate = ref(props.passed_gate)
-
+const show_preflight_check = ref(false)
 onMounted(() => {
   get_gate_check()
   get_gate_clerk()
@@ -67,7 +72,8 @@ onMounted(() => {
 
 function open_preflight_check() {
   store.selected_gate = gate.value
-  router.push('/preflight-check')
+  show_preflight_check.value = true
+  // router.push('/preflight-check')
 }
 
 function formatTime(time: string) {

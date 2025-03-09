@@ -11,7 +11,7 @@
           ? 'text-primary expanded-header'
           : 'text-primary collapsed-header'
       "
-      icon="mdi-account-multiple"
+      icon="mdi-monitor-dashboard"
     >
       <q-item
         dense
@@ -83,7 +83,7 @@
           ? 'text-primary expanded-header'
           : 'text-primary collapsed-header'
       "
-      icon="mdi-account-multiple"
+      icon="mdi-text-box-check-outline"
     >
       <div class="q-pa-md">
         <q-select
