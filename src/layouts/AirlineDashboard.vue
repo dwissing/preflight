@@ -3,7 +3,7 @@
     <q-card class="col-6">
       <q-card-section>
         <h6 class="q-my-none">Today's terminals</h6>
-        {{ today }}
+
         <div class="row">
           <div v-for="airline in todays_airlines" :key="airline.id">
             <SingleAirline :airline="airline" />

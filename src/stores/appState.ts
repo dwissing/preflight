@@ -70,6 +70,6 @@ export const useAppState = defineStore('appState', {
   // 4) Configure which parts of state to persist
   persist: {
     storage: localStorage,
-    pick: ['selected_zone', 'airlines', 'selected_airline'],
+    pick: ['selected_zone', 'airlines', 'selected_airline', 'current_date'],
   },
 })

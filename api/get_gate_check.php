@@ -28,7 +28,8 @@ function get_gate_check($data)
 
     //if gate_check is empty, create a new one
     if (empty($gate_check)) {
-        $sql = "INSERT INTO gate_checks (airline_id, gate_number, gate_id) VALUES (:airline_id, :gate_number, :gate_id)";
+        $sql = "INSERT INTO gate_checks (airline_id, gate_number, gate_id)
+        VALUES (:airline_id, :gate_number, :gate_id)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':airline_id', $airline_id, PDO::PARAM_INT);
         $stmt->bindParam(':gate_number', $gate_number, PDO::PARAM_INT);

@@ -20,11 +20,11 @@
           <!-- THESE ARE FOR TELEPORTING: -->
           <div id="search"></div>
           <div id="controls">
-            <q-btn @click="set_date(0)">Monday</q-btn>
-            <q-btn @click="set_date(1)">Tuesday</q-btn>
-            <q-btn @click="set_date(2)">Wednesday</q-btn>
-            <q-btn @click="set_date(3)">Thursday</q-btn>
-            <q-btn @click="set_date(4)">Friday</q-btn>
+            <q-btn @click="set_date(1)">Monday</q-btn>
+            <q-btn @click="set_date(2)">Tuesday</q-btn>
+            <q-btn @click="set_date(3)">Wednesday</q-btn>
+            <q-btn @click="set_date(4)">Thursday</q-btn>
+            <q-btn @click="set_date(5)">Friday</q-btn>
           </div>
           date: {{ store.current_date }}
           <!-- --------------------- -->

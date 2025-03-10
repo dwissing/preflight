@@ -1,54 +1,121 @@
 <template>
   <q-card class="container">
     <div class="section">
-      <q-btn
-        icon="mdi-microphone-plus"
-        :outline="gate_check.audio_status != 'good'"
-        color="positive"
-        @click="sound_check_good"
-      ></q-btn>
-      Sound check
-      <q-btn
-        icon="mdi-microphone-off"
-        :outline="gate_check.audio_status != 'bad'"
-        color="negative"
-        @click="sound_check_bad"
-      ></q-btn>
-    </div>
-    <div class="section">
-      <q-btn
-        icon="mdi-video-plus"
-        :outline="gate_check.video_status != 'good'"
-        color="positive"
-        @click="video_check_good"
-      ></q-btn>
-      Video check
-      <q-btn
-        icon="mdi-video-off"
-        :outline="gate_check.video_status != 'bad'"
-        color="negative"
-        @click="video_check_bad"
-      ></q-btn>
-      <div class="video_preview">
-        <q-img src="jetbridge.gif" />
+      <div class="row align-center">
+        <q-btn
+          icon="mdi-microphone-plus"
+          :outline="gate_check.audio_status != 'good'"
+          :disable="not_running"
+          color="positive"
+          @click="sound_check_good"
+        ></q-btn>
+        <div class="row align-center">
+          <div class="col q-px-sm q-pt-xs" style="line-height: 1em">
+            <div class="">Sound</div>
+            <div class="">check</div>
+          </div>
+          <div class="q-pt-sm q-mr-md">
+            <q-icon size="20px" name="mdi-information-outline">
+              <q-tooltip>
+                Speak "Check 1,2,3" into the microphone.<br />
+                Voice recognition will mark the audio as good.
+              </q-tooltip>
+            </q-icon>
+          </div>
+        </div>
+        <q-btn
+          icon="mdi-microphone-off"
+          :outline="gate_check.audio_status != 'bad'"
+          color="negative"
+          @click="sound_check_bad"
+        ></q-btn>
+        <q-btn
+          class="q-ml-md"
+          icon="mdi-cancel"
+          :outline="!not_running"
+          color="grey"
+          @click="set_not_running"
+        >
+          <div
+            style="
+              font-size: 0.8em;
+              text-transform: none;
+              width: 30px;
+              line-height: 1em;
+            "
+          >
+            Not running
+          </div>
+        </q-btn>
       </div>
     </div>
     <div class="section">
-      <q-btn
-        icon="mdi-airplane-check"
-        :outline="gate_check.first_flight_verified != 'good'"
-        color="positive"
-        @click="flight_check_good"
-      ></q-btn>
-      First flight
-      <q-btn
-        icon="mdi-airplane-alert"
-        :outline="gate_check.first_flight_verified != 'bad'"
-        color="negative"
-        @click="flight_check_bad"
-      ></q-btn>
-      <div class="flight_preview">
-        <q-img :src="plane_image" />
+      <div class="row align-center">
+        <q-btn
+          icon="mdi-video-plus"
+          :outline="gate_check.video_status != 'good'"
+          color="positive"
+          @click="video_check_good"
+          :disable="not_running"
+        ></q-btn>
+        <div class="row align-center">
+          <div class="col q-px-sm q-pt-xs" style="line-height: 1em">
+            <div class="">Video</div>
+            <div class="">check</div>
+          </div>
+          <div class="q-pt-sm q-mr-md">
+            <q-icon size="20px" name="mdi-information-outline">
+              <q-tooltip>
+                <div class="" style="width: 200px">
+                  Click the "Good" button to mark the video as good and capture
+                  a thumbnail of the video
+                </div>
+              </q-tooltip>
+            </q-icon>
+          </div>
+        </div>
+        <q-btn
+          icon="mdi-video-off"
+          :outline="gate_check.video_status != 'bad'"
+          color="negative"
+          @click="video_check_bad"
+          :disable="not_running"
+        ></q-btn>
+        <div class="video_preview">
+          <q-img src="jetbridge.gif" />
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="row align-center">
+        <q-btn
+          icon="mdi-airplane-check"
+          :outline="gate_check.first_flight_verified != 'good'"
+          color="positive"
+          @click="flight_check_good"
+          :disable="not_running"
+        ></q-btn>
+        <div class="row align-center">
+          <div class="col q-px-sm q-pt-xs" style="line-height: 1em">
+            <div class="">First</div>
+            <div class="">flight</div>
+          </div>
+          <div class="q-pt-sm q-mr-md">
+            <q-icon size="20px" name="mdi-information-outline">
+              <q-tooltip> Verify the vehicle image is correct. </q-tooltip>
+            </q-icon>
+          </div>
+        </div>
+        <q-btn
+          icon="mdi-airplane-alert"
+          :outline="gate_check.first_flight_verified != 'bad'"
+          color="negative"
+          @click="flight_check_bad"
+          :disable="not_running"
+        ></q-btn>
+        <div class="flight_preview">
+          <q-img :src="plane_image" />
+        </div>
       </div>
     </div>
   </q-card>
@@ -87,7 +154,10 @@ async function get_gate_check() {
     console.error('Error fetching gate check:', error)
   }
 }
-
+const not_running = ref(false)
+function set_not_running() {
+  not_running.value = !not_running.value
+}
 const plane_image = computed(() => {
   //between 1 and 8
   const random_number = Math.floor(Math.random() * 8) + 1

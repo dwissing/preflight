@@ -17,9 +17,7 @@ function reset_airline($data)
 {
     $conn = get_pdo();
 
-    $sql = "UPDATE gate_checks
-    SET audio_status = 'unknown',
-    video_status = 'unknown', first_flight_verified = 'unknown'
+    $sql = "DELETE FROM gate_checks
     WHERE airline_id = :airline_id";
 
     $stmt = $conn->prepare($sql);
