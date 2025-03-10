@@ -98,5 +98,6 @@ async function reset() {
   width: 220px;
   max-width: 220px;
   padding: 0px;
+  background-color: #ffffff;
 }
 </style>

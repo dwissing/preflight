@@ -1,174 +1,136 @@
 <template>
-  <q-list dense class="mylist">
-    <q-expansion-item
-      v-model="store.sidebar_expansion_group.airlines"
-      group="somegroup"
-      label="Zone Dashboard"
-      popout
-      :class="store.sidebar_expansion_group.airlines ? 'expanded' : 'collapsed'"
-      :header-class="
-        store.sidebar_expansion_group.airlines
-          ? 'text-primary expanded-header'
-          : 'text-primary collapsed-header'
-      "
-      icon="mdi-monitor-dashboard"
-    >
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Northeast' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Northeast'"
-        to="/airline-dashboard"
-      >
-        Northeast
-      </q-item>
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Gulf' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Gulf'"
-        to="/airline-dashboard"
-      >
-        Gulf
-      </q-item>
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Midwest' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Midwest'"
-        to="/airline-dashboard"
-      >
-        Midwest
-      </q-item>
-
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Central' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Central'"
-        to="/airline-dashboard"
-      >
-        Central
-      </q-item>
-
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'West' ? 'myactive' : ''"
-        @click="store.selected_zone = 'West'"
-        to="/airline-dashboard"
-      >
-        West
-      </q-item>
-    </q-expansion-item>
-    <q-separator></q-separator>
-    <q-expansion-item
-      v-model="store.sidebar_expansion_group.preflight_checks"
-      group="somegroup"
-      label="Preflight Checks"
-      popout
-      :to="'/preflight-check'"
-      :class="
-        store.sidebar_expansion_group.preflight_checks
-          ? 'expanded'
-          : 'collapsed'
-      "
-      :header-class="
-        store.sidebar_expansion_group.preflight_checks
-          ? 'text-primary expanded-header'
-          : 'text-primary collapsed-header'
-      "
-      icon="mdi-text-box-check-outline"
-    >
-      <div class="q-pa-md">
-        <q-select
-          v-model="store.selected_airline"
-          :options="store.airlines"
-          dense
-          options-dense
-          outlined
-          option-value="abbreviation"
-          label="Terminal"
-          option-label="abbreviation"
-        ></q-select>
-      </div>
-    </q-expansion-item>
-    <q-separator></q-separator>
-    <q-expansion-item
-      v-model="store.sidebar_expansion_group.clerk_schedule"
-      group="somegroup"
-      label="Clerk Schedule"
-      popout
-      :class="
-        store.sidebar_expansion_group.clerk_schedule ? 'expanded' : 'collapsed'
-      "
-      :header-class="
-        store.sidebar_expansion_group.clerk_schedule
-          ? 'text-primary expanded-header'
-          : 'text-primary collapsed-header'
-      "
-      icon="mdi-account-multiple"
-    >
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Northeast' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Northeast'"
-        to="/airline-dashboard"
-      >
-        Northeast
-      </q-item>
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Gulf' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Gulf'"
-        to="/airline-dashboard"
-      >
-        Gulf
-      </q-item>
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Midwest' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Midwest'"
-        to="/airline-dashboard"
-      >
-        Midwest
-      </q-item>
-
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'Central' ? 'myactive' : ''"
-        @click="store.selected_zone = 'Central'"
-        to="/airline-dashboard"
-      >
-        Central
-      </q-item>
-
-      <q-item
-        dense
-        clickable
-        exact
-        :active-class="store.selected_zone === 'West' ? 'myactive' : ''"
-        @click="store.selected_zone = 'West'"
-        to="/airline-dashboard"
-      >
-        West
-      </q-item>
-    </q-expansion-item>
-    <q-separator></q-separator>
-  </q-list>
+  <div class="col mycol">
+    <div class="">
+      <q-list dense class="mylist">
+        <q-expansion-item
+          v-model="store.sidebar_expansion_group.airlines"
+          group="somegroup"
+          label="Zone Dashboard"
+          popout
+          :class="
+            store.sidebar_expansion_group.airlines ? 'expanded' : 'collapsed'
+          "
+          :header-class="
+            store.sidebar_expansion_group.airlines
+              ? 'text-primary expanded-header'
+              : 'text-primary collapsed-header'
+          "
+          icon="mdi-monitor-dashboard"
+        >
+          <q-item
+            dense
+            clickable
+            exact
+            :active-class="
+              store.selected_zone === 'Northeast' ? 'myactive' : ''
+            "
+            @click="store.selected_zone = 'Northeast'"
+            to="/airline-dashboard"
+          >
+            Northeast
+          </q-item>
+          <q-item
+            dense
+            clickable
+            exact
+            :active-class="store.selected_zone === 'Gulf' ? 'myactive' : ''"
+            @click="store.selected_zone = 'Gulf'"
+            to="/airline-dashboard"
+          >
+            Gulf
+          </q-item>
+          <q-item
+            dense
+            clickable
+            exact
+            :active-class="store.selected_zone === 'Midwest' ? 'myactive' : ''"
+            @click="store.selected_zone = 'Midwest'"
+            to="/airline-dashboard"
+          >
+            Midwest
+          </q-item>
+          <q-item
+            dense
+            clickable
+            exact
+            :active-class="store.selected_zone === 'Central' ? 'myactive' : ''"
+            @click="store.selected_zone = 'Central'"
+            to="/airline-dashboard"
+          >
+            Central
+          </q-item>
+          <q-item
+            dense
+            clickable
+            exact
+            :active-class="store.selected_zone === 'West' ? 'myactive' : ''"
+            @click="store.selected_zone = 'West'"
+            to="/airline-dashboard"
+          >
+            West
+          </q-item>
+        </q-expansion-item>
+        <q-separator></q-separator>
+        <q-expansion-item
+          v-model="store.sidebar_expansion_group.preflight_checks"
+          group="somegroup"
+          label="Preflight Checks"
+          popout
+          :to="'/preflight-check'"
+          :class="
+            store.sidebar_expansion_group.preflight_checks
+              ? 'expanded'
+              : 'collapsed'
+          "
+          :header-class="
+            store.sidebar_expansion_group.preflight_checks
+              ? 'text-primary expanded-header'
+              : 'text-primary collapsed-header'
+          "
+          icon="mdi-text-box-check-outline"
+        >
+          <div class="q-pa-md">
+            <q-select
+              v-model="store.selected_airline"
+              :options="store.airlines"
+              dense
+              options-dense
+              outlined
+              option-value="abbreviation"
+              label="Terminal"
+              option-label="abbreviation"
+            ></q-select>
+          </div>
+        </q-expansion-item>
+        <q-separator></q-separator>
+        <q-expansion-item
+          :disabled="true"
+          v-model="store.sidebar_expansion_group.clerk_schedule"
+          group="somegroup"
+          label="Clerk Schedule"
+          popout
+          :class="
+            store.sidebar_expansion_group.clerk_schedule
+              ? 'expanded'
+              : 'collapsed'
+          "
+          :header-class="
+            store.sidebar_expansion_group.clerk_schedule
+              ? 'text-primary expanded-header'
+              : 'text-primary collapsed-header'
+          "
+          icon="mdi-account-multiple"
+        >
+        </q-expansion-item>
+        <q-separator></q-separator>
+      </q-list>
+    </div>
+    <q-space></q-space>
+    <div class="info">
+      Disclaimer: This page contains no real information and is not associated
+      with any real company.
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -255,5 +217,17 @@ onMounted(() => {
   position: absolute;
   margin-left: 150px;
   margin-top: -10px;
+}
+.mycol {
+  // background-color: rgb(184, 70, 70);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
+.info {
+  font-size: 1rem;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 </style>

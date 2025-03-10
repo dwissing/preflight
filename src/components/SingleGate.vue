@@ -140,6 +140,8 @@ function get_row_class() {
     gate_check.value.first_flight_verified == 'bad'
   ) {
     return 'gate-bad gate-card'
+  } else if (gate_check.value.audio_status == 'not_running') {
+    return 'not_running gate-card'
   } else {
     return 'gate-unknown gate-card'
   }
@@ -246,5 +248,10 @@ async function get_gate_clerk() {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.not_running {
+  color: #7a7a7a;
+  background-color: #f0f0f0;
+  border-color: #acacac;
 }
 </style>

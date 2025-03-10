@@ -155,8 +155,14 @@ async function get_gate_check() {
   }
 }
 const not_running = ref(false)
-function set_not_running() {
+async function set_not_running() {
   not_running.value = !not_running.value
+  if (not_running.value) {
+    gate_check.value.audio_status = 'not_running'
+  } else {
+    gate_check.value.audio_status = 'unknown'
+  }
+  await update_gate_check()
 }
 const plane_image = computed(() => {
   //between 1 and 8

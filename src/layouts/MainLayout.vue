@@ -19,14 +19,14 @@
 
           <!-- THESE ARE FOR TELEPORTING: -->
           <div id="search"></div>
-          <div id="controls">
+          <div id="controls" class="q-ml-sm">
             <q-btn @click="set_date(1)">Monday</q-btn>
             <q-btn @click="set_date(2)">Tuesday</q-btn>
             <q-btn @click="set_date(3)">Wednesday</q-btn>
             <q-btn @click="set_date(4)">Thursday</q-btn>
             <q-btn @click="set_date(5)">Friday</q-btn>
           </div>
-          date: {{ store.current_date }}
+          <div class="q-pl-sm">pretend date: {{ store.current_date }}</div>
           <!-- --------------------- -->
           <q-space></q-space>
         </q-toolbar>
@@ -45,9 +45,10 @@
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          height: 100%;
         "
       >
-        <div class="">
+        <div class="flex-grow full-height">
           <TheSidebar></TheSidebar>
         </div>
       </q-drawer>
