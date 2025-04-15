@@ -18,12 +18,12 @@ function get_db_config()
     // PDO::ATTR_EMULATE_PREPARES => false
   );
   if ($script_base === $prod_base) {
-    $config = (object) array('username' => 'root', 'password' => 'me1neDSQ9d1/', 'dsn' => 'mysql:host=localhost;dbname=preflight;charset=utf8mb4', 'options' => $options);
+    $config = (object) array('username' => 'root', 'password' => 'password/', 'dsn' => 'mysql:host=localhost;dbname=preflight;charset=utf8mb4', 'options' => $options);
     return $config;
   } else {
     opcache_reset();
-    $config = (object) array('username' => 'root', 'password' => 'me1neDSQ9d1/', 'dsn' => 'mysql:host=localhost;dbname=preflight;charset=utf8mb4', 'options' => $options);
-    // $config = (object) array('username' => 'root', 'password' => 'me1neDSQ9d1/', 'dsn' => 'mysql:host=localhost;dbname=preflight-dev;charset=utf8mb4', 'options' => $options);
+    $config = (object) array('username' => 'root', 'password' => 'password/', 'dsn' => 'mysql:host=localhost;dbname=preflight;charset=utf8mb4', 'options' => $options);
+    // $config = (object) array('username' => 'root', 'password' => 'password/', 'dsn' => 'mysql:host=localhost;dbname=preflight-dev;charset=utf8mb4', 'options' => $options);
     return $config;
   }
 }
